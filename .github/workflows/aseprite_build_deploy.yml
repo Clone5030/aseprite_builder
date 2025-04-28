@@ -37,7 +37,12 @@ jobs:
     - name: Should we start new build?
       id: should_build
       if: steps.version_check.outputs.cache-hit != 'true'
-      run: echo "::set-output name=should_build::true"
+      run: |
+        echo "Cache hit: ${steps.version_check.outputs.cache-hit}"
+        echo "::set-output name=should_build::true"
+    - name: Debug should_build output
+      run: |
+         echo "should_build: ${{ needs.check-version.outputs.should_build }}"
     - name: Create Release
       id: create_release
       if: steps.should_build.outputs.should_build
