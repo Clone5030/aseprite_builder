@@ -96,9 +96,9 @@ jobs:
       - name: (Windows) Install Visual Studio Build Tools
         if: matrix.os == 'windows-latest'
         run: |
-          choco install visualstudio2019buildtools
-          # Check if the installation worked
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\"
+          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.WindowsSDK.10.0"
+          # Verify installation
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\"
       
       - name: (Windows) Set architecture for the produced binary
         if: matrix.os == 'windows-latest'
